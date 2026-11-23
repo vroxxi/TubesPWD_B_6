@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/koneksi.php';
-require __DIR__ . '/login.xhtml';
 
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
@@ -57,4 +56,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require __DIR__ . '/login.html';
+require __DIR__ . '/login.xhtml';

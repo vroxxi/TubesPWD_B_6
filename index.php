@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/koneksi.php';
-require __DIR__ . '/index.xhtml';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -58,4 +57,4 @@ try {
     exit('Data pengguna belum dapat dimuat. Coba lagi nanti.');
 }
 
-require __DIR__ . '/index.html';
+require __DIR__ . '/index.xhtml';

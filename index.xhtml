@@ -1,79 +1,228 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
 <head>
-    <meta http-equiv="Content-Type"
-          content="text/html; charset=UTF-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-
-    <title>Beranda | Smart Warnet</title>
-
-    <link rel="stylesheet"
-          type="text/css"
-          href="css/style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Smart Warnet</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
-<body>
-    <div class="auth-card dashboard">
-        <div class="brand">
-            SMART <span>WARNET</span>
-        </div>
+<body class="portal-body dashboard-body">
 
-        <p class="eyebrow">YOUR GAMING SPACE</p>
+    <aside class="sidebar">
 
-        <h1>
-            Halo, <?= e($pengguna['nama']) ?>!
-        </h1>
+        <a class="brand" href="index.php">
+            <span class="brand-mark">W<sup>+</sup></span>
+            <span class="brand-name">SMART
+                <small>WARNET PORTAL</small>
+            </span>
+        </a>
 
-        <p class="subtitle">
-            Selamat datang di Smart Warnet Portal.
-        </p>
+        <p class="side-caption">YOUR GAMING SPACE</p>
 
-        <div class="alert success">
-            Kamu berhasil login.
-        </div>
+        <nav class="side-nav">
 
-        <div class="profile-info">
-            <h2>Informasi akun</h2>
+            <a class="active" href="index.php">
+                <span class="nav-icon">✦</span>Explore
+            </a>
 
-            <dl>
-                <dt>Nama</dt>
-                <dd><?= e($pengguna['nama']) ?></dd>
+            <a href="#booking">
+                <span class="nav-icon">▦</span>Booking PC
+            </a>
 
-                <dt>Email</dt>
-                <dd><?= e($pengguna['email']) ?></dd>
+            <a href="#food">
+                <span class="nav-icon">♨</span>Food &amp; drinks
+            </a>
 
-                <dt>Tanggal bergabung</dt>
-                <dd>
-                    <?= e(date(
-                        'd-m-Y',
-                        strtotime($pengguna['dibuat_pada'])
-                    )) ?>
-                </dd>
-            </dl>
-        </div>
+            <a href="#profile">
+                <span class="nav-icon">●</span>Profile
+            </a>
 
-        <form action="index.php" method="post">
-            <div class="form-fields">
-                <input
-                    type="hidden"
-                    name="csrf"
-                    value="<?= e($_SESSION['csrf']) ?>"
-                />
+            <form class="logout-form" action="index.php" method="post">
 
-                <input
-                    type="hidden"
-                    name="aksi"
-                    value="logout"
-                />
+                <input type="hidden"
+                       name="csrf"
+                       value="<?= e($_SESSION['csrf']) ?>" />
 
-                <button type="submit" class="logout">
-                    Keluar akun
+                <input type="hidden"
+                       name="aksi"
+                       value="logout" />
+
+                <button type="submit" class="nav-logout logout-button">
+                    <span class="nav-icon">⇥</span>LogOut
                 </button>
+
+            </form>
+
+        </nav>
+
+    </aside>
+
+    <main class="main-area">
+
+        <header class="topbar dashboard-topbar">
+
+            <div>
+                <span>Smart Warnet</span>
+                <span class="crumb-separator">/</span>
+                <strong>Dashboard</strong>
             </div>
-        </form>
-    </div>
+
+            <div class="top-user">
+
+                <span class="avatar">
+                    <?= e(strtoupper(substr($pengguna['nama'], 0, 1))) ?>
+                </span>
+
+                <span><?= e($pengguna['nama']) ?></span>
+
+            </div>
+
+        </header>
+
+        <section class="dashboard-content">
+
+            <div class="dashboard-heading">
+
+                <div>
+                    <p class="welcome-label">YOUR GAMING SPACE</p>
+
+                    <h1>
+                        Selamat datang,
+                        <span><?= e($pengguna['nama']) ?>!</span>
+                    </h1>
+
+                    <p class="welcome-desc">
+                        Siap untuk pengalaman bermain yang lebih seru hari ini?
+                    </p>
+                </div>
+
+                <div class="status-pill">
+                    <span></span> Member Smart Warnet
+                </div>
+
+            </div>
+
+            <div class="hero-banner">
+
+                <div class="hero-copy">
+
+                    <p class="hero-kicker">SMART WARNET PORTAL</p>
+
+                    <h2>
+                        Waktunya naik<br />
+                        ke level berikutnya.
+                    </h2>
+
+                    <p>
+                        Temukan PC favorit dan nikmati pengalaman gaming bersama kami.
+                    </p>
+
+                    <a class="hero-link" href="#booking">
+                        Jelajahi layanan <span>→</span>
+                    </a>
+
+                </div>
+
+                <div class="hero-symbol">
+                    W<sup>+</sup>
+                </div>
+
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Layanan Kami</h2>
+                    <p>Pilih layanan yang ingin kamu gunakan.</p>
+                </div>
+            </div>
+
+            <div class="service-grid">
+
+                <article class="service-card" id="booking">
+
+                    <div class="service-icon">▦</div>
+
+                    <h3>Booking PC</h3>
+
+                    <p>
+                        Lihat informasi dan pilih komputer untuk sesi bermainmu.
+                    </p>
+
+                    <span class="coming-soon">Segera hadir</span>
+
+                </article>
+
+                <article class="service-card" id="food">
+
+                    <div class="service-icon">♨</div>
+
+                    <h3>Food &amp; Drinks</h3>
+
+                    <p>
+                        Lihat pilihan makanan dan minuman selama bermain.
+                    </p>
+
+                    <span class="coming-soon">Segera hadir</span>
+
+                </article>
+
+                <article class="service-card" id="profile">
+
+                    <div class="service-icon">●</div>
+
+                    <h3>Profil Saya</h3>
+
+                    <p>
+                        Informasi akun yang digunakan untuk masuk ke portal.
+                    </p>
+
+                    <span class="profile-email">
+                        <?= e($pengguna['email']) ?>
+                    </span>
+
+                </article>
+
+            </div>
+
+            <div class="account-panel">
+
+                <div>
+                    <p class="welcome-label">INFORMASI AKUN</p>
+                    <h2>Profil pengguna</h2>
+                </div>
+
+                <dl class="account-details">
+
+                    <div>
+                        <dt>Nama lengkap</dt>
+                        <dd><?= e($pengguna['nama']) ?></dd>
+                    </div>
+
+                    <div>
+                        <dt>Email</dt>
+                        <dd><?= e($pengguna['email']) ?></dd>
+                    </div>
+
+                    <div>
+                        <dt>Bergabung sejak</dt>
+                        <dd>
+                            <?= e(date('d-m-Y', strtotime($pengguna['dibuat_pada']))) ?>
+                        </dd>
+                    </div>
+
+                </dl>
+
+            </div>
+
+            <p class="footer-note">
+                © <?= date('Y') ?> Smart Warnet Portal. All rights reserved.
+            </p>
+
+        </section>
+
+    </main>
+
 </body>
 </html>
