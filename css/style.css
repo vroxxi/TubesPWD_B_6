@@ -200,3 +200,28 @@ dd {
         font-size: 26px;
     }
 }
+
+#email,
+#password {
+    background-color: #10121E !important;
+    color: #FFFFFF !important;
+    border: 1px solid #232738 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#email:focus,
+#password:focus {
+    background-color: #10121E !important;
+    color: #FFFFFF !important;
+    border: 1px solid #232738 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#email:-webkit-autofill,
+#password:-webkit-autofill {
+    -webkit-text-fill-color: #FFFFFF !important;
+    -webkit-box-shadow: 0 0 0 1000px #10121E inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
