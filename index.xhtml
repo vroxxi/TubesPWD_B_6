@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Beranda | Smart Warnet</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="css/style.css" />
+</head>
+
+<body>
+    <div class="auth-card dashboard">
+        <div class="brand">
+            SMART <span>WARNET</span>
+        </div>
+
+        <p class="eyebrow">YOUR GAMING SPACE</p>
+
+        <h1>
+            Halo, <?= e($pengguna['nama']) ?>!
+        </h1>
+
+        <p class="subtitle">
+            Selamat datang di Smart Warnet Portal.
+        </p>
+
+        <div class="alert success">
+            Kamu berhasil login.
+        </div>
+
+        <div class="profile-info">
+            <h2>Informasi akun</h2>
+
+            <dl>
+                <dt>Nama</dt>
+                <dd><?= e($pengguna['nama']) ?></dd>
+
+                <dt>Email</dt>
+                <dd><?= e($pengguna['email']) ?></dd>
+
+                <dt>Tanggal bergabung</dt>
+                <dd>
+                    <?= e(date(
+                        'd-m-Y',
+                        strtotime($pengguna['dibuat_pada'])
+                    )) ?>
+                </dd>
+            </dl>
+        </div>
+
+        <form action="index.php" method="post">
+            <div class="form-fields">
+                <input
+                    type="hidden"
+                    name="csrf"
+                    value="<?= e($_SESSION['csrf']) ?>"
+                />
+
+                <input
+                    type="hidden"
+                    name="aksi"
+                    value="logout"
+                />
+
+                <button type="submit" class="logout">
+                    Keluar akun
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
