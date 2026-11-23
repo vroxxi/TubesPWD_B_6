@@ -761,16 +761,6 @@ a {
         font-size: 110px;
     }
 }
-'''
-for name, content in [
-    ("css/style.css", css),
-]:
-    (base/name).write_text(content, encoding="utf-8")
-print("CSS dibuat", len(css), "karakter")
-**Tambahkan CSS berikut paling bawah** pada `style.css` untuk mengunci posisi elemen sesuai screenshot:
-
-```css
-/* FINAL FIX - MATCH REFERENSI LOGIN */
 
 @media (min-width: 1260px) {
 

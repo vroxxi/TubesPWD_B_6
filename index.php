@@ -2,7 +2,7 @@
 require_once __DIR__ . '/koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: page/login/login.php');
     exit;
 }
 
@@ -31,7 +31,7 @@ if (
 
     session_destroy();
 
-    header('Location: login.php', true, 303);
+    header('Location: page/login/login.php', true, 303);
     exit;
 }
 
@@ -48,7 +48,7 @@ try {
 
     if (!$pengguna) {
         unset($_SESSION['user_id']);
-        header('Location: login.php');
+        header('Location: page/login/login.php');
         exit;
     }
 } catch (PDOException $exception) {
