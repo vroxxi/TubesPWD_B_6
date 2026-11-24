@@ -36,14 +36,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             $hash = password_hash($password, PASSWORD_DEFAULT);
+            $localPart = strstr($email, '@', true);
+            $username = strtolower(preg_replace('/[^a-z0-9]/', '', $localPart));
+
+            if ($username === '') {
+                $username = 'pengguna';
+            }
+
+            $username = substr($username, 0, 40);
+            $baseUsername = $username;
+            $counter = 1;
+
+            $cekUsername = $pdo->prepare(
+                'SELECT 1 FROM pengguna WHERE username = :username LIMIT 1'
+            );
+
+            do {
+                $cekUsername->execute(['username' => $username]);
+
+                if (!$cekUsername->fetchColumn()) {
+                    break;
+                }
+
+                $suffix = (string) $counter++;
+                $username = substr($baseUsername, 0, 50 - strlen($suffix)) . $suffix;
+            } while ($username !== '');
 
             $query = $pdo->prepare(
-                'INSERT INTO pengguna (nama, email, password)
-                 VALUES (:nama, :email, :password)'
+                'INSERT INTO pengguna
+                    (nama_lengkap, username, email, password_hash)
+                 VALUES
+                    (:nama, :username, :email, :password)'
             );
 
             $query->execute([
                 'nama' => $nama,
+                'username' => $username,
                 'email' => $email,
                 'password' => $hash,
             ]);

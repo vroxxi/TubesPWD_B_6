@@ -36,9 +36,9 @@ $pengguna = null;
 if (isset($_SESSION['user_id'])) {
     try {
         $query = $pdo->prepare(
-            'SELECT id, nama, email, dibuat_pada
+            'SELECT id_pengguna, nama_lengkap, username, email, role, dibuat_pada
              FROM pengguna
-             WHERE id = :id'
+             WHERE id_pengguna = :id'
         );
 
         $query->execute(['id' => $_SESSION['user_id']]);

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             $query = $pdo->prepare(
-                'SELECT id, nama, email, password
+                'SELECT id_pengguna, nama_lengkap, email, password_hash
                  FROM pengguna
                  WHERE email = :email
                  LIMIT 1'
@@ -37,11 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (
                 $pengguna
-                && password_verify($password, $pengguna['password'])
+                && password_verify($password, $pengguna['password_hash'])
             ) {
                 session_regenerate_id(true);
 
-                $_SESSION['user_id'] = (int) $pengguna['id'];
+                $_SESSION['user_id'] = (int) $pengguna['id_pengguna'];
                 $_SESSION['csrf'] = bin2hex(random_bytes(32));
 
                 header('Location: index.php', true, 303);

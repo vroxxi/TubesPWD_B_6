@@ -85,7 +85,7 @@
         <div class="topbar-action">
             <?php if (isset($_SESSION['user_id'])): ?>
                 <span class="welcome-user">
-                    Halo, <?= e($pengguna['nama']) ?>
+                    Halo, <?= e($pengguna['nama_lengkap']) ?>
                 </span>
             <?php else: ?>
                 <a class="topbar-login" href="login.php">Log In</a>
