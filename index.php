@@ -1,11 +1,6 @@
 <?php
 require_once __DIR__ . '/koneksi.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: page/login/login.php');
-    exit;
-}
-
 // Proses logout.
 if (
     $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -31,30 +26,32 @@ if (
 
     session_destroy();
 
-    header('Location: page/login/login.php', true, 303);
+    header('Location: login.php', true, 303);
     exit;
 }
 
-// Mengambil identitas terbaru dari database.
-try {
-    $query = $pdo->prepare(
-        'SELECT id, nama, email, dibuat_pada
-         FROM pengguna
-         WHERE id = :id'
-    );
+// Mengambil identitas terbaru dari database ketika pengguna sudah login.
+$pengguna = null;
 
-    $query->execute(['id' => $_SESSION['user_id']]);
-    $pengguna = $query->fetch();
+if (isset($_SESSION['user_id'])) {
+    try {
+        $query = $pdo->prepare(
+            'SELECT id, nama, email, dibuat_pada
+             FROM pengguna
+             WHERE id = :id'
+        );
 
-    if (!$pengguna) {
-        unset($_SESSION['user_id']);
-        header('Location: page/login/login.php');
-        exit;
+        $query->execute(['id' => $_SESSION['user_id']]);
+        $pengguna = $query->fetch();
+
+        if (!$pengguna) {
+            unset($_SESSION['user_id']);
+        }
+    } catch (PDOException $exception) {
+        error_log($exception->getMessage());
+        http_response_code(500);
+        exit('Data pengguna belum dapat dimuat. Coba lagi nanti.');
     }
-} catch (PDOException $exception) {
-    error_log($exception->getMessage());
-    http_response_code(500);
-    exit('Data pengguna belum dapat dimuat. Coba lagi nanti.');
 }
 
 require __DIR__ . '/index.xhtml';
