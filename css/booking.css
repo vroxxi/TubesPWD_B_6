@@ -1,0 +1,525 @@
+/* =========================================================
+ * Smart Warnet Portal - Stylesheet Modul Booking PC
+ * Selaras dengan css/style.css dan tema Dark Gaming Arena
+ * ========================================================= */
+
+.booking-page {
+    background-color: var(--background, #0b0b13);
+}
+
+.booking-page .side-nav > a.booking-nav-active {
+    position: relative;
+    color: var(--purple-light, #b39cf5);
+    background: rgba(148, 121, 237, 0.08);
+}
+
+.booking-page .side-nav > a.booking-nav-active::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--purple, #9679ed);
+    box-shadow: 0 0 12px rgba(150, 121, 237, 0.75);
+}
+
+.booking-page .side-nav > a.booking-nav-active .nav-icon {
+    color: var(--purple-light, #b39cf5);
+}
+
+/* Navigasi khusus Admin */
+.side-nav a.admin-nav {
+    color: #38bdf8 !important;
+}
+
+.side-nav a.admin-nav:hover,
+.side-nav a.admin-nav.active {
+    background: rgba(56, 189, 248, 0.12) !important;
+    color: #7dd3fc !important;
+}
+
+/* Konten Booking */
+.booking-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 36px;
+    padding: 34px 44px 60px;
+    align-items: start;
+    width: 100%;
+    max-width: 1220px;
+}
+
+.booking-main-panel {
+    min-width: 0;
+}
+
+.booking-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #f3f2f7;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.booking-title span {
+    color: var(--purple, #9679ed);
+}
+
+.booking-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #cfcfe0;
+    margin-bottom: 9px;
+}
+
+.booking-sublabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: #cfcfe0;
+    margin: 22px 0 11px;
+}
+
+/* Kategori Chips */
+.booking-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.booking-chip {
+    background: #1b1b28;
+    color: #cfcfe0;
+    border: 1px solid var(--border, #282839);
+    border-radius: 9px;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.booking-chip:hover {
+    background: #252538;
+    border-color: rgba(150, 121, 237, 0.4);
+}
+
+.booking-chip.on {
+    background: var(--purple, #9679ed);
+    color: #0d0d18;
+    border-color: var(--purple, #9679ed);
+    box-shadow: 0 0 16px rgba(150, 121, 237, 0.45);
+}
+
+.booking-chip.chip-sm {
+    padding: 8px 16px;
+    font-size: 12.5px;
+}
+
+/* Form Row (Tanggal & Waktu) */
+.booking-row {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-top: 18px;
+}
+
+.booking-field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-input,
+.booking-select {
+    background: #10121e;
+    color: #f0eff8;
+    border: 1px solid var(--border, #282839);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 13.5px;
+    color-scheme: dark;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.booking-input:focus,
+.booking-select:focus {
+    border-color: var(--purple, #9679ed);
+    outline: 2px solid rgba(150, 121, 237, 0.2);
+}
+
+.booking-input[type="date"] {
+    min-width: 250px;
+}
+
+.time-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-sep {
+    color: var(--muted, #9298b0);
+    font-weight: 700;
+}
+
+.time-box .booking-select {
+    width: 96px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+/* Denah Grid PC */
+.pc-map-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 620px;
+}
+
+.pc-unit {
+    background: #0f101c;
+    border: 1px solid #23253b;
+    border-radius: 9px;
+    height: 72px;
+    padding: 9px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--muted, #9298b0);
+    font-size: 11px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: all 0.18s ease;
+}
+
+.pc-unit em {
+    align-self: flex-end;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    color: #e5e5f0;
+}
+
+.pc-badge {
+    font-weight: 600;
+    font-size: 10.5px;
+    text-transform: capitalize;
+}
+
+.pc-unit:hover:not(:disabled) {
+    border-color: var(--purple, #9679ed);
+    background: #17182b;
+}
+
+.pc-unit.sel {
+    border-color: var(--purple, #9679ed);
+    background: #231b3e;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(150, 121, 237, 0.5);
+}
+
+.pc-unit.sel em {
+    color: #ffffff;
+}
+
+.pc-unit.hide {
+    display: none;
+}
+
+/* Status PC: Booked (Merah) */
+.pc-unit.pc-booked {
+    background: #1a0f14;
+    border-color: #4a1c25;
+    color: #8a656d;
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.pc-unit.pc-booked .pc-badge {
+    color: #ef4444;
+}
+
+.pc-unit.pc-booked em {
+    color: #7d4952;
+    text-decoration: line-through;
+}
+
+/* Status PC: Maintenance (Kuning/Oranye) */
+.pc-unit.pc-maintenance {
+    background: #1a170d;
+    border-color: #524016;
+    color: #8c7b52;
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.pc-unit.pc-maintenance .pc-badge {
+    color: #f59e0b;
+}
+
+.pc-unit.pc-maintenance em {
+    color: #876d29;
+}
+
+/* Kartu Ringkasan Booking (Aksen Cyan #06B6D4) */
+.booking-summary-card {
+    background: var(--card, #151520);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    border-radius: 14px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 24px;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.08);
+}
+
+.summary-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0eff8;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    border-radius: 2px;
+    background: #06b6d4;
+    box-shadow: 0 0 10px #06b6d4;
+}
+
+.summary-prop-label {
+    color: #8a92ac;
+    font-size: 11.5px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-prop-val {
+    color: #e6e5f3;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+
+.summary-total-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #06b6d4;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.summary-total-val {
+    font-size: 30px;
+    font-weight: 800;
+    color: #f3f2f7;
+    margin: 4px 0 24px;
+    text-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
+}
+
+.btn-confirm-booking {
+    width: 100%;
+    height: 44px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #06b6d4, #0284c7);
+    color: #0b1120;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(6, 182, 212, 0.4);
+    transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.btn-confirm-booking:hover:not(:disabled) {
+    filter: brightness(1.12);
+}
+
+.btn-confirm-booking:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.btn-confirm-booking:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(0.5);
+}
+
+/* Notifikasi Toast */
+.booking-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(90px);
+    background: #06b6d4;
+    color: #091321;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.4);
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    z-index: 9999;
+}
+
+.booking-toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Alert Box */
+.booking-alert {
+    border-radius: 9px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+
+.booking-alert-success {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #6ee7b7;
+}
+
+.booking-alert-error {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    color: #fca5a5;
+}
+
+/* Table Admin PC */
+.admin-card {
+    background: var(--card, #151520);
+    border: 1px solid var(--border, #282839);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 26px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #23253b;
+    text-align: left;
+}
+
+.admin-table th {
+    color: #9298b0;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+}
+
+.badge-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge-available {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.badge-booked {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.badge-maintenance {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.15s;
+}
+
+.btn-act-avail {
+    background: #059669;
+    color: #ffffff;
+}
+
+.btn-act-maint {
+    background: #d97706;
+    color: #ffffff;
+}
+
+.btn-act-del {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.btn-action:hover {
+    filter: brightness(1.15);
+}
+
+/* Responsive */
+@media (max-width: 1040px) {
+    .booking-content {
+        grid-template-columns: 1fr;
+    }
+    .booking-summary-card {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .booking-content {
+        padding: 24px 16px;
+    }
+    .pc-map-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .booking-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .booking-input[type="date"] {
+        min-width: 0;
+        width: 100%;
+    }
+}

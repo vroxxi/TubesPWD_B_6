@@ -10,7 +10,7 @@
     <title>Explore | Smart Warnet</title>
     <link rel="stylesheet"
           type="text/css"
-          href="css/style.css?v=4" />
+          href="css/style.css?v=5" />
 </head>
 
 <body class="portal-body explore-page">
@@ -32,21 +32,28 @@
             Explore
         </a>
 
-        <a href="index.php#booking">
+        <a href="booking.php">
             <span class="nav-icon">▦</span>
             Booking PC
         </a>
 
-        <a href="index.php#food">
+        <a href="fnb.php">
             <span class="nav-icon">♨</span>
             Food &amp; drinks
         </a>
 
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="index.php#profile">
+            <a href="profile.php">
                 <span class="nav-icon">●</span>
                 Profile
             </a>
+
+            <?php if (isset($isAdmin) && $isAdmin && file_exists(__DIR__ . '/admin_pc.php')): ?>
+                <a class="admin-nav" href="admin_pc.php">
+                    <span class="nav-icon">⚙</span>
+                    Kelola PC (Admin)
+                </a>
+            <?php endif; ?>
 
             <form class="logout-form"
                   action="index.php"
@@ -83,10 +90,22 @@
         <strong>Explore</strong>
 
         <div class="topbar-action">
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <span class="welcome-user">
-                    Halo, <?= e($pengguna['nama_lengkap']) ?>
-                </span>
+            <?php if (isset($_SESSION['user_id']) && $pengguna): ?>
+                <a class="topbar-user" href="profile.php">
+                    <span class="topbar-avatar">
+                        <?php if ($hasCustomPhoto): ?>
+                            <img src="<?= e($photoSrc) ?>"
+                                 alt="Avatar <?= e((string) $pengguna['nama_lengkap']) ?>"
+                                 class="topbar-avatar-img" />
+                        <?php else: ?>
+                            <span class="topbar-avatar-initial"><?= e($userInitial) ?></span>
+                        <?php endif; ?>
+                    </span>
+                    <span class="topbar-user-info">
+                        <span class="topbar-user-name"><?= e((string) $pengguna['nama_lengkap']) ?></span>
+                        <span class="topbar-user-role"><?= e($userRoleDisplay) ?></span>
+                    </span>
+                </a>
             <?php else: ?>
                 <a class="topbar-login" href="login.php">Log In</a>
             <?php endif; ?>
@@ -112,12 +131,12 @@
 
             <div class="hero-actions">
                 <a class="hero-button hero-button-primary"
-                   href="#booking">
+                   href="booking.php">
                     Booking PC
                     <span aria-hidden="true">↗</span>
                 </a>
                 <a class="hero-button hero-button-secondary"
-                   href="#food">
+                   href="fnb.php">
                     Pesan F&amp;B Sekarang
                     <span aria-hidden="true">→</span>
                 </a>

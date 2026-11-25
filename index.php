@@ -32,11 +32,15 @@ if (
 
 // Mengambil identitas terbaru dari database ketika pengguna sudah login.
 $pengguna = null;
+$hasCustomPhoto = false;
+$photoSrc = 'assets/images/default-avatar.svg';
+$userInitial = 'U';
+$userRoleDisplay = 'Player';
 
 if (isset($_SESSION['user_id'])) {
     try {
         $query = $pdo->prepare(
-            'SELECT id_pengguna, nama_lengkap, username, email, role, dibuat_pada
+            'SELECT id_pengguna, nama_lengkap, username, email, role, foto, dibuat_pada
              FROM pengguna
              WHERE id_pengguna = :id'
         );
@@ -46,6 +50,35 @@ if (isset($_SESSION['user_id'])) {
 
         if (!$pengguna) {
             unset($_SESSION['user_id']);
+        } else {
+            $fotoDb = trim((string) ($pengguna['foto'] ?? ''));
+            if (
+                $fotoDb !== ''
+                && $fotoDb !== 'default'
+                && $fotoDb !== 'default.png'
+                && $fotoDb !== 'default-avatar.svg'
+            ) {
+                $safeName = basename($fotoDb);
+                $fullPath = __DIR__ . '/uploads/profiles/' . $safeName;
+                if (file_exists($fullPath) && is_file($fullPath)) {
+                    $photoSrc = 'uploads/profiles/' . $safeName;
+                    $hasCustomPhoto = true;
+                }
+            }
+
+            $sourceName = trim((string) ($pengguna['nama_lengkap'] ?? ''));
+            if ($sourceName === '') {
+                $sourceName = trim((string) ($pengguna['username'] ?? ''));
+            }
+            if ($sourceName !== '') {
+                $userInitial = strtoupper(substr($sourceName, 0, 1));
+            }
+
+            $roleDb = trim((string) ($pengguna['role'] ?? 'pelanggan'));
+            $isAdmin = (strtolower($roleDb) === 'admin');
+            $userRoleDisplay = (strtolower($roleDb) === 'pelanggan' || $roleDb === '')
+                ? 'Player'
+                : ucfirst($roleDb);
         }
     } catch (PDOException $exception) {
         error_log($exception->getMessage());

@@ -1,0 +1,508 @@
+/* =========================================================
+ * Smart Warnet Portal - Stylesheet Halaman Profile
+ * Selaras warna, tipografi, dan proporsi dengan css/style.css
+ * ========================================================= */
+
+/* Menu Profile aktif: tetap ikuti .side-nav > a.active dari style.css + aksen garis ungu kiri */
+.profile-page .side-nav > a.profile-nav-active {
+    position: relative;
+}
+
+.profile-page .side-nav > a.profile-nav-active::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--purple);
+    box-shadow: 0 0 12px rgba(150, 121, 237, 0.75);
+}
+
+.profile-page .side-nav > a.profile-nav-active .nav-icon {
+    color: var(--purple-light);
+}
+
+.profile-page .logout-form-inner {
+    width: 100%;
+}
+
+.profile-page .logout-button {
+    cursor: pointer;
+}
+
+/* Topbar Info User (selaras tinggi topbar 94px dari style.css) */
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.topbar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1b1a2b;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.topbar-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.topbar-avatar-initial {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--purple-light);
+    line-height: 1;
+}
+
+.topbar-user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.topbar-user-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.topbar-user-role {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* Konten Utama Profile (proporsi selaras explore-content & auth-layout) */
+.profile-content {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 34px 42px 56px;
+}
+
+.profile-title {
+    margin-bottom: 24px;
+    color: #f3f2f7;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+}
+
+.title-accent {
+    color: #b39bf2;
+}
+
+/* Notifikasi (warna selaras .auth-page .alert di style.css) */
+.profile-alert {
+    border-radius: 9px;
+    padding: 11px 14px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.profile-alert-hidden {
+    display: none;
+}
+
+.profile-alert-success {
+    background: rgba(111, 196, 149, 0.12);
+    border: 1px solid rgba(111, 196, 149, 0.35);
+    color: #91ddb0;
+}
+
+.profile-alert-error {
+    background: rgba(228, 93, 104, 0.12);
+    border: 1px solid rgba(228, 93, 104, 0.35);
+    color: #f49aa1;
+}
+
+.profile-alert-text {
+    margin: 0;
+}
+
+.profile-alert-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.profile-alert-list li {
+    margin-bottom: 3px;
+}
+
+.profile-alert-list li:last-child {
+    margin-bottom: 0;
+}
+
+.profile-form-hidden {
+    display: none;
+}
+
+/* Grid 2 Kartu Sejajar */
+.profile-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+}
+
+.profile-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.profile-card-title {
+    margin-bottom: 20px;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* Kartu Kiri: Profile Picture */
+.card-picture {
+    width: 310px;
+    min-width: 280px;
+    flex-shrink: 0;
+    padding: 24px 22px 26px;
+}
+
+.avatar-preview-wrap {
+    width: 184px;
+    height: 184px;
+    margin: 4px auto 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d9d9d9;
+    border: 3px solid var(--border);
+}
+
+.profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-identity {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-display-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+    word-wrap: break-word;
+}
+
+.profile-display-username {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 13px;
+}
+
+.member-id-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 13px 5px 6px;
+    border-radius: 999px;
+    background: #10121e;
+    border: 1px solid var(--border);
+}
+
+.member-badge-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9f86ed, #7254c8);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.member-badge-text {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #b4b7c8;
+}
+
+.photo-actions {
+    text-align: center;
+}
+
+.input-file-hidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.selected-file-info {
+    font-size: 11px;
+    color: var(--purple-light);
+    margin-top: 8px;
+    min-height: 15px;
+    word-break: break-word;
+}
+
+.delete-btn-wrap {
+    margin-top: 8px;
+}
+
+/* Tombol Aksi (selaras .primary-button di style.css) */
+.btn-neon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #9a83eb, #7866b7);
+    color: #171329;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(150, 121, 237, 0.35);
+    transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.btn-neon:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 0 22px rgba(150, 121, 237, 0.52);
+}
+
+.btn-neon:active {
+    transform: translateY(1px);
+}
+
+.btn-full {
+    display: flex;
+    width: 100%;
+}
+
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 20px;
+    border: 1px solid rgba(195, 79, 88, 0.55);
+    border-radius: 7px;
+    background: transparent;
+    color: #f49aa1;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: rgba(228, 93, 104, 0.14);
+    border-color: #c34f58;
+    color: #ffc2c7;
+}
+
+.btn-save {
+    padding: 0 22px;
+}
+
+.btn-cancel {
+    height: 42px;
+    padding: 0 14px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.btn-cancel:hover {
+    color: var(--text);
+}
+
+/* Kartu Kanan: Form Informasi Pribadi & Keamanan Password */
+.card-form {
+    flex: 1;
+    min-width: 0;
+    padding: 26px 28px 26px;
+}
+
+.profile-section-security {
+    margin-top: 28px;
+}
+
+.form-row-full {
+    margin-bottom: 16px;
+}
+
+.form-row-two {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #b4b7c8;
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+/* Input selaras .auth-page .form-fields input di style.css (#10121E) */
+.profile-page .form-input {
+    display: block;
+    width: 100%;
+    height: 43px;
+    padding: 0 14px;
+    border: 1px solid #252635;
+    border-radius: 8px;
+    outline: 0;
+    background: #10121e;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12.5px;
+    transition: border-color 0.2s ease, outline-color 0.2s ease;
+}
+
+.profile-page .form-input::placeholder {
+    color: #8f9dbd;
+}
+
+.profile-page .form-input:focus {
+    border-color: var(--purple) !important;
+    outline: 2px solid rgba(150, 121, 237, 0.18) !important;
+    outline-offset: 1px;
+}
+
+.profile-page .form-input.input-error {
+    border-color: #c34f58 !important;
+    outline: 2px solid rgba(228, 93, 104, 0.2) !important;
+}
+
+/* Susunan Horizontal: Keamanan & Password */
+.form-row-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.form-label-inline {
+    width: 155px;
+    min-width: 155px;
+    color: #b4b7c8;
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+.form-input-inline-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.field-feedback {
+    font-size: 11px;
+    margin-top: 5px;
+    min-height: 15px;
+}
+
+.feedback-error {
+    color: #f49aa1;
+}
+
+.feedback-ok {
+    color: #91ddb0;
+}
+
+.form-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+/* Responsive (selaras breakpoint style.css: 1100px, 900px, 600px) */
+@media (max-width: 1100px) {
+    .profile-content {
+        padding: 28px 32px 44px;
+    }
+
+    .profile-grid {
+        flex-direction: column;
+    }
+
+    .card-picture {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .profile-page .side-nav > a.profile-nav-active::before {
+        left: -13px;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-content {
+        padding: 24px 16px 38px;
+    }
+
+    .form-row-two {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .form-row-horizontal {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .form-label-inline {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .form-input-inline-wrap {
+        width: 100%;
+    }
+}

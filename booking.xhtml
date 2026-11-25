@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Booking PC | Smart Warnet</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=5" />
+    <link rel="stylesheet" type="text/css" href="css/booking.css?v=2" />
+
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        window.SERVER_PCS = <?php echo json_encode($jsPcs); ?>;
+        window.TODAY_DATE = <?php echo json_encode($todayDate); ?>;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="js/booking.js?v=2"></script>
+</head>
+
+<body class="portal-body booking-page">
+
+    <!-- Sidebar Kiri -->
+    <div class="sidebar">
+        <a class="brand" href="index.php">
+            <span class="brand-mark">W<sup>+</sup></span>
+            <span class="brand-name">
+                SMART
+                <small>WARNET PORTAL</small>
+            </span>
+        </a>
+
+        <p class="side-caption">YOUR GAMING SPACE</p>
+
+        <div class="side-nav">
+            <a href="index.php">
+                <span class="nav-icon">&#10022;</span>
+                Explore
+            </a>
+
+            <a class="active booking-nav-active" href="booking.php">
+                <span class="nav-icon">&#9638;</span>
+                Booking PC
+            </a>
+
+            <a href="fnb.php">
+                <span class="nav-icon">&#9832;</span>
+                Food &amp; drinks
+            </a>
+
+            <a href="profile.php">
+                <span class="nav-icon">&#9679;</span>
+                Profile
+            </a>
+
+            <?php if ($isAdmin && file_exists(__DIR__ . '/admin_pc.php')): ?>
+                <a class="admin-nav" href="admin_pc.php">
+                    <span class="nav-icon">&#9881;</span>
+                    Kelola PC (Admin)
+                </a>
+            <?php endif; ?>
+
+            <form class="logout-form" action="index.php" method="post">
+                <div class="logout-form-inner">
+                    <input type="hidden" name="csrf" value="<?php echo e($_SESSION['csrf']); ?>" />
+                    <input type="hidden" name="aksi" value="logout" />
+                    <button type="submit" class="nav-logout logout-button">
+                        <span class="nav-icon">&#8677;</span>
+                        LogOut
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Area Kanan: Topbar + Konten Utama -->
+    <div class="main-area">
+        <div class="topbar">
+            <span>Smart Warnet</span>
+            <span class="crumb-separator">/</span>
+            <strong>Booking PC</strong>
+
+            <div class="topbar-action">
+                <a class="topbar-user" href="profile.php">
+                    <span class="topbar-avatar">
+                        <?php if ($hasCustomPhoto): ?>
+                            <img src="<?php echo e($photoSrc); ?>"
+                                 alt="Avatar <?php echo e((string) ($pengguna['nama_lengkap'] ?? 'User')); ?>"
+                                 class="topbar-avatar-img" />
+                        <?php else: ?>
+                            <span class="topbar-avatar-initial"><?php echo e($userInitial); ?></span>
+                        <?php endif; ?>
+                    </span>
+                    <span class="topbar-user-info">
+                        <span class="topbar-user-name"><?php echo e((string) ($pengguna['nama_lengkap'] ?? 'User')); ?></span>
+                        <span class="topbar-user-role"><?php echo e($userRoleDisplay); ?></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="booking-content">
+            <!-- Panel Kiri: Pemilihan PC & Parameter Booking -->
+            <div class="booking-main-panel">
+                <h1 class="booking-title">Booking <span>PC</span></h1>
+
+                <?php if ($successMsg !== ''): ?>
+                    <div class="booking-alert booking-alert-success">
+                        <?php echo e($successMsg); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($errorMsg !== ''): ?>
+                    <div class="booking-alert booking-alert-error">
+                        <?php echo e($errorMsg); ?>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Filter Kategori -->
+                <div class="booking-label">Kategori</div>
+                <div class="booking-chips" id="categoryChips">
+                    <button type="button" class="booking-chip on" value="Semua">Semua</button>
+                    <button type="button" class="booking-chip" value="Reguler">Reguler</button>
+                    <button type="button" class="booking-chip" value="VIP">VIP</button>
+                    <button type="button" class="booking-chip" value="VVIP">VVIP</button>
+                </div>
+
+                <!-- Pemilihan Hari & Waktu -->
+                <div class="booking-row">
+                    <div class="booking-field-group">
+                        <label for="bookingDate" class="booking-label">Hari &amp; Tanggal</label>
+                        <input type="text" id="bookingDate" class="booking-input" value="<?php echo e($todayDate); ?>" />
+                    </div>
+                    <div class="booking-field-group">
+                        <label for="startHour" class="booking-label">Jam Booking</label>
+                        <div class="time-box">
+                            <select id="startHour" class="booking-select">
+                                <option value="20">20:00</option>
+                            </select>
+                            <span class="time-sep">-</span>
+                            <select id="endHour" class="booking-select" disabled="disabled">
+                                <option value="23">23:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Denah / Peta Unit PC -->
+                <div class="booking-sublabel">Peta / Denah PC</div>
+                <div class="pc-map-grid" id="pcMapGrid"></div>
+
+                <!-- Durasi & Paket -->
+                <div class="booking-sublabel">Durasi / Paket</div>
+                <div class="booking-chips" id="durationChips">
+                    <button type="button" class="booking-chip chip-sm" value="1">1 Jam</button>
+                    <button type="button" class="booking-chip chip-sm" value="2">2 Jam</button>
+                    <button type="button" class="booking-chip chip-sm on" value="3">3 Jam</button>
+                    <button type="button" class="booking-chip chip-sm" value="6_night">Paket Malam (6 Jam - Rp 30.000)</button>
+                </div>
+            </div>
+
+            <!-- Panel Kanan: Ringkasan Booking (Aksen Cyan) -->
+            <div class="booking-summary-card">
+                <h2 class="summary-title">Ringkasan Booking</h2>
+
+                <div class="summary-prop-label">PC Terpilih</div>
+                <div class="summary-prop-val" id="sPc">Belum dipilih</div>
+
+                <div class="summary-prop-label">Waktu</div>
+                <div class="summary-prop-val" id="sTime">-</div>
+
+                <div class="summary-prop-label">Harga per Jam</div>
+                <div class="summary-prop-val" id="sRate">-</div>
+
+                <div class="summary-total-label">Total Pembayaran</div>
+                <div class="summary-total-val" id="sTotal">Rp 0</div>
+
+                <form id="bookingForm" action="booking.php" method="post">
+                    <div style="display:none;">
+                        <input type="hidden" name="csrf" value="<?php echo e($_SESSION['csrf']); ?>" />
+                        <input type="hidden" name="action" value="book_pc" />
+                        <input type="hidden" id="hidden_pc_id" name="pc_id" value="" />
+                        <input type="hidden" id="hidden_date" name="booking_date" value="" />
+                        <input type="hidden" id="hidden_start_hour" name="start_hour" value="" />
+                        <input type="hidden" id="hidden_duration" name="duration" value="" />
+                        <input type="hidden" id="hidden_is_night" name="is_night" value="0" />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-confirm-booking" id="btnConfirmBooking" disabled="disabled">
+                            Konfirmasi Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
