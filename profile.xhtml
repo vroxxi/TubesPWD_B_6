@@ -12,10 +12,10 @@
 
     <link rel="stylesheet"
           type="text/css"
-          href="css/style.css?v=4" />
+          href="css/style.css" />
     <link rel="stylesheet"
           type="text/css"
-          href="css/profile.css?v=2" />
+          href="css/profile.css" />
 
     <script type="text/javascript"
             src="js/profile.js"></script>
@@ -51,15 +51,19 @@
                 Food &amp; drinks
             </a>
 
-            <a class="active profile-nav-active" href="profile.php">
+            <a class="active profile-nav profile-nav-active" href="profile.php">
                 <span class="nav-icon">&#9679;</span>
                 Profile
             </a>
 
-            <?php if (isset($isAdmin) && $isAdmin && file_exists(__DIR__ . '/admin_pc.php')): ?>
+            <?php if (isset($isAdmin) && $isAdmin): ?>
                 <a class="admin-nav" href="admin_pc.php">
                     <span class="nav-icon">&#9881;</span>
-                    Kelola PC (Admin)
+                    Kelola PC
+                </a>
+                <a class="admin-nav" href="admin_fnb.php">
+                    <span class="nav-icon">&#9832;</span>
+                    Kelola F&amp;B
                 </a>
             <?php endif; ?>
 

@@ -132,6 +132,18 @@ a {
     background: rgba(148, 121, 237, .08);
 }
 
+.side-nav > a.profile-nav:not(.active),
+.side-nav > a.admin-nav:not(.active),
+.side-nav > a.profile-nav:not(.active) .nav-icon,
+.side-nav > a.admin-nav:not(.active) .nav-icon {
+    color: #a1a7c0;
+}
+
+.side-nav > a.profile-nav.active .nav-icon,
+.side-nav > a.admin-nav.active .nav-icon {
+    color: var(--purple-light);
+}
+
 .nav-icon {
     width: 20px;
     color: #9da4bd;

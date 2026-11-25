@@ -10,7 +10,7 @@
     <title>Explore | Smart Warnet</title>
     <link rel="stylesheet"
           type="text/css"
-          href="css/style.css?v=5" />
+          href="css/style.css" />
 </head>
 
 <body class="portal-body explore-page">
@@ -43,15 +43,19 @@
         </a>
 
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="profile.php">
+            <a class="profile-nav" href="profile.php">
                 <span class="nav-icon">●</span>
                 Profile
             </a>
 
-            <?php if (isset($isAdmin) && $isAdmin && file_exists(__DIR__ . '/admin_pc.php')): ?>
+            <?php if (isset($isAdmin) && $isAdmin): ?>
                 <a class="admin-nav" href="admin_pc.php">
                     <span class="nav-icon">⚙</span>
-                    Kelola PC (Admin)
+                    Kelola PC
+                </a>
+                <a class="admin-nav" href="admin_fnb.php">
+                    <span class="nav-icon">♨</span>
+                    Kelola F&amp;B
                 </a>
             <?php endif; ?>
 

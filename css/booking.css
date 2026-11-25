@@ -29,17 +29,6 @@
     color: var(--purple-light, #b39cf5);
 }
 
-/* Navigasi khusus Admin */
-.side-nav a.admin-nav {
-    color: #38bdf8 !important;
-}
-
-.side-nav a.admin-nav:hover,
-.side-nav a.admin-nav.active {
-    background: rgba(56, 189, 248, 0.12) !important;
-    color: #7dd3fc !important;
-}
-
 /* Konten Booking */
 .booking-content {
     display: grid;

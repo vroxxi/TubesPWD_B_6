@@ -188,12 +188,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && input('action') === 'book_pc') {
 /* 4. Ambil Daftar Semua PC dari Database untuk Dirender ke Peta/Denah */
 $computers = [];
 try {
-    $stmtPcs = $pdo->query('SELECT id_meja, nomor_meja, kategori, tarif_per_jam, status FROM meja_pc ORDER BY id_meja ASC');
+    $stmtPcs = $pdo->query(
+        "SELECT id_meja, nomor_meja, kategori, tarif_per_jam, status
+         FROM meja_pc
+         ORDER BY CAST(SUBSTRING_INDEX(nomor_meja, '-', -1) AS UNSIGNED) ASC,
+                  id_meja ASC"
+    );
     $computers = $stmtPcs->fetchAll();
 } catch (PDOException $e) {
     // Fallback jika tabel meja_pc belum memiliki kolom kategori (versi SQL lama)
     try {
-        $stmtPcs = $pdo->query('SELECT id_meja, nomor_meja, tarif_per_jam, status FROM meja_pc ORDER BY id_meja ASC');
+        $stmtPcs = $pdo->query(
+            "SELECT id_meja, nomor_meja, tarif_per_jam, status
+             FROM meja_pc
+             ORDER BY CAST(SUBSTRING_INDEX(nomor_meja, '-', -1) AS UNSIGNED) ASC,
+                      id_meja ASC"
+        );
         $computers = $stmtPcs->fetchAll();
     } catch (PDOException $e2) {
         error_log($e2->getMessage());

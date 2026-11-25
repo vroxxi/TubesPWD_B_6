@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="id" lang="id">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola F&amp;B | Smart Warnet</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
+</head>
+<body class="portal-body admin-page">
+    <div class="sidebar">
+        <a class="brand" href="index.php">
+            <span class="brand-mark">W<sup>+</sup></span>
+            <span class="brand-name">SMART<small>WARNET PORTAL</small></span>
+        </a>
+        <p class="side-caption">ADMIN MANAGEMENT</p>
+        <div class="side-nav">
+            <a href="index.php"><span class="nav-icon">&#10022;</span>Explore</a>
+            <a href="booking.php"><span class="nav-icon">&#9638;</span>Booking PC</a>
+            <a href="fnb.php"><span class="nav-icon">&#9832;</span>Food &amp; drinks</a>
+            <a class="profile-nav" href="profile.php"><span class="nav-icon">&#9679;</span>Profile</a>
+            <a class="admin-nav" href="admin_pc.php"><span class="nav-icon">&#9881;</span>Kelola PC</a>
+            <a class="admin-nav active" href="admin_fnb.php"><span class="nav-icon">&#9832;</span>Kelola F&amp;B</a>
+            <form class="logout-form" action="index.php" method="post">
+                <input type="hidden" name="csrf" value="<?= e($_SESSION['csrf']) ?>" />
+                <input type="hidden" name="aksi" value="logout" />
+                <button type="submit" class="nav-logout logout-button">
+                    <span class="nav-icon">&#8677;</span>Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-area">
+        <div class="topbar">
+            <span>Smart Warnet</span><span class="crumb-separator">/</span>
+            <strong>Kelola F&amp;B</strong>
+            <div class="topbar-action"><?= e((string) $adminUser['nama_lengkap']) ?> (Admin)</div>
+        </div>
+
+        <main class="admin-content">
+            <header class="admin-heading">
+                <p class="admin-eyebrow">ADMINISTRATION</p>
+                <h1>Kelola <span>F&amp;B</span></h1>
+                <p>Atur menu, kategori, harga, stok, dan ketersediaan.</p>
+            </header>
+
+            <?php foreach ($errors as $error): ?>
+                <div class="admin-alert admin-alert-error"><?= e($error) ?></div>
+            <?php endforeach; ?>
+            <?php if ($success !== ''): ?>
+                <div class="admin-alert admin-alert-success"><?= e($success) ?></div>
+            <?php endif; ?>
+
+            <section class="admin-card">
+                <h2><?= $editingId > 0 ? 'Edit Menu' : 'Tambah Menu' ?></h2>
+                <form class="admin-form" action="admin_fnb.php" method="post">
+                    <input type="hidden" name="csrf" value="<?= e($_SESSION['csrf']) ?>" />
+                    <input type="hidden" name="aksi" value="<?= $editingId > 0 ? 'update' : 'create' ?>" />
+                    <?php if ($editingId > 0): ?>
+                        <input type="hidden" name="id" value="<?= (int) $editingId ?>" />
+                    <?php endif; ?>
+                    <div class="admin-form-grid">
+                        <div class="admin-field">
+                            <label for="nama_menu">Nama menu</label>
+                            <input id="nama_menu" name="nama_menu" type="text" maxlength="100"
+                                   value="<?= e((string) $form['nama_menu']) ?>" required="required" />
+                        </div>
+                        <div class="admin-field">
+                            <label for="kategori">Kategori</label>
+                            <select id="kategori" name="kategori" required="required">
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= e($category) ?>"
+                                        <?= $form['kategori'] === $category ? 'selected="selected"' : '' ?>>
+                                        <?= e(ucfirst($category)) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="admin-field">
+                            <label for="harga">Harga (Rp)</label>
+                            <input id="harga" name="harga" type="number" min="0" step="0.01"
+                                   value="<?= e((string) $form['harga']) ?>" required="required" />
+                        </div>
+                        <div class="admin-field">
+                            <label for="stok">Stok</label>
+                            <input id="stok" name="stok" type="number" min="0" step="1"
+                                   value="<?= e((string) $form['stok']) ?>" required="required" />
+                        </div>
+                        <div class="admin-field">
+                            <label for="tersedia">Ketersediaan</label>
+                            <select id="tersedia" name="tersedia" required="required">
+                                <option value="1" <?= $form['tersedia'] === '1' ? 'selected="selected"' : '' ?>>Tersedia</option>
+                                <option value="0" <?= $form['tersedia'] === '0' ? 'selected="selected"' : '' ?>>Tidak tersedia</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <button class="admin-button" type="submit">
+                            <?= $editingId > 0 ? 'Simpan Perubahan' : 'Tambah Menu' ?>
+                        </button>
+                        <?php if ($editingId > 0): ?>
+                            <a class="admin-button admin-button-muted" href="admin_fnb.php">Batal</a>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-card">
+                <div class="admin-card-heading">
+                    <h2>Daftar Menu</h2>
+                    <span><?= count($menus) ?> item</span>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nama</th><th>Kategori</th><th>Harga</th>
+                                <th>Stok</th><th>Ketersediaan</th><th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!$menus): ?>
+                                <tr><td colspan="6" class="admin-empty">Belum ada data menu.</td></tr>
+                            <?php endif; ?>
+                            <?php foreach ($menus as $menu): ?>
+                                <tr>
+                                    <td><?= e((string) $menu['nama_menu']) ?></td>
+                                    <td><?= e(ucfirst((string) $menu['kategori'])) ?></td>
+                                    <td>Rp <?= e(number_format((float) $menu['harga'], 0, ',', '.')) ?></td>
+                                    <td><?= (int) $menu['stok'] ?></td>
+                                    <td><span class="admin-status">
+                                        <?= (int) $menu['tersedia'] === 1 ? 'Tersedia' : 'Tidak tersedia' ?>
+                                    </span></td>
+                                    <td class="admin-actions">
+                                        <a class="admin-button admin-button-small"
+                                           href="admin_fnb.php?edit=<?= (int) $menu['id_menu'] ?>">Edit</a>
+                                        <form action="admin_fnb.php" method="post">
+                                            <input type="hidden" name="csrf" value="<?= e($_SESSION['csrf']) ?>" />
+                                            <input type="hidden" name="aksi" value="delete" />
+                                            <input type="hidden" name="id" value="<?= (int) $menu['id_menu'] ?>" />
+                                            <button class="admin-button admin-button-danger admin-button-small"
+                                                    type="submit">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
